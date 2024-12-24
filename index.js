@@ -1,12 +1,14 @@
 const express = require("express") ; 
 const dotenv = require('dotenv') ; 
-
+const KakfkaMiddleware = require("../server/Middlewares/kafka")
 
 dotenv.config() ; 
 
 //decalrations
 const app = express() ; 
-const PORT = process.env.PORTNUMBER
+const PORT = process.env.PORTNUMBER ; 
+
+
 
 
 
@@ -15,6 +17,8 @@ const PORT = process.env.PORTNUMBER
 app.use(express.json()) ; 
 app.use(express.urlencoded({extended:false})) ; 
 
+//kafka initialize 
+const {producer , consumer} = KakfkaMiddleware() ; 
 
 
 
