@@ -1,6 +1,6 @@
 const express = require("express") ; 
 const dotenv = require('dotenv') ; 
-const KakfkaMiddleware = require("../server/Middlewares/kafka")
+const KafkaMiddleware = require("../server/Middlewares/kafka")
 
 dotenv.config() ; 
 
@@ -18,7 +18,7 @@ app.use(express.json()) ;
 app.use(express.urlencoded({extended:false})) ; 
 
 //kafka initialize 
-const {producer , consumer} = KakfkaMiddleware() ; 
+const {producer , consumer} = KafkaMiddleware() ; 
 
 
 
