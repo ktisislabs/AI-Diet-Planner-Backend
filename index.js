@@ -20,11 +20,14 @@ app.use(express.urlencoded({extended:false})) ;
 app.use('/api',Limiter) ; 
 
 //kafka initialize 
-const {producer , consumer} = KafkaMiddleware() ; 
+const initialzeKafka=()=>{
+    const {producer,sendata} = KafkaMiddleware() ; 
+    app.set('sendata',sendata) ; 
+    console.log('Kafka Initialized Sucessfully!');
+}
 
 
-
-
+initialzeKafka() ; 
 //server initialization
 app.listen(PORT,()=>{
     console.log(`Server is running on port number ${PORT}`) ; 
