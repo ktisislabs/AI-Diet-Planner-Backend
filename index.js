@@ -1,7 +1,8 @@
 const express = require("express") ; 
 const dotenv = require('dotenv') ; 
-const KafkaMiddleware = require("../server/Middlewares/kafka")
 const Limiter = require('../server/Middlewares/limiter')
+const cors = require('cors') ; 
+const DietRouter = require("./Routes/dietGenerate");
 
 dotenv.config() ; 
 
@@ -18,17 +19,17 @@ const PORT = process.env.PORTNUMBER ;
 app.use(express.json()) ; 
 app.use(express.urlencoded({extended:false})) ; 
 app.use('/api',Limiter) ; 
-
-//kafka initialize 
-const initialzeKafka=()=>{
-    const {producer,sendata} = KafkaMiddleware() ; 
-    app.set('sendata',sendata) ; 
-    console.log('Kafka Initialized Sucessfully!');
-}
+app.use(cors({
+    origin:'http://localhost:3000',
+    methods:['GET','POST','PUT','DELETE']
+}))
 
 
-initialzeKafka() ; 
-//server initialization
+//apis
+app.use('/api/diet-planner',DietRouter)
+
+
+
 app.listen(PORT,()=>{
     console.log(`Server is running on port number ${PORT}`) ; 
 })
