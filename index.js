@@ -22,13 +22,6 @@ app.use(cors({
 }))
 
 
-
-
-
-     AdminKafka();
-  
-
-
 //apis
 app.use('/api/diet-planner',DietRouter)
 
